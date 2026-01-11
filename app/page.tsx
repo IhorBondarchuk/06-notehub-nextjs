@@ -1,5 +1,9 @@
-function App() {
-  return <div></div>;
-}
+import Home from "@/components/Home/Home";
 
-export default App;
+export default function Notes() {
+  return (
+    <section>
+      <Home />
+    </section>
+  );
+}
