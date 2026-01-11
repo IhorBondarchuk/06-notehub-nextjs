@@ -7,11 +7,13 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
 export default function NoteDetailsClient() {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams<{ id: string }>();
+  const id = typeof params.id === "string" ? params.id : "";
 
   const { data, isLoading, error } = useQuery<Note, Error>({
     queryKey: ["note", id],
     queryFn: () => fetchNotesById(id),
+    enabled: !!id,
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });
@@ -24,10 +26,10 @@ export default function NoteDetailsClient() {
     <div className={css.container}>
       <div className={css.item}>
         <div className={css.header}>
-          <h2>{data?.title}</h2>
+          <h2>{data.title}</h2>
         </div>
-        <p className={css.content}>{data?.content}</p>
-        <p className={css.date}>{data?.createdAt}</p>
+        <p className={css.content}>{data.content}</p>
+        <p className={css.date}>{data.createdAt}</p>
       </div>
     </div>
   );

@@ -54,7 +54,7 @@ export default function NotesClient() {
             Create note +
           </button>
         </div>
-        {notes.length > 0 && <NoteList notes={notes || []} />}
+        {notes.length > 0 && <NoteList notes={notes} />}
       </div>
       {isOpenModal && (
         <Modal
